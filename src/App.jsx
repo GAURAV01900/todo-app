@@ -7,6 +7,21 @@ function App() {
   });
   const [input, setInput] = useState("");
 
+  //filter todos
+  const [filter,setFilter] = useState("all");
+
+  const filteredTodos = todos.filter((todo)=>{
+    if(filter=="active")
+      return !todo.completed
+
+    if(filter=="completed")
+      return todo.completed
+
+    return true
+
+
+  })
+
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos));
   }, [todos]);
@@ -81,8 +96,20 @@ function App() {
           </div>
         </div>
 
+        <div className="flex gap-2 mt-2">
+          <button className="bg-green-500 text-white px-3 rounded" 
+          onClick={()=>{setFilter("active")}}
+          >Active</button>
+          <button className="bg-blue-500 text-white px-3 rounded" 
+          onClick={()=>{setFilter("completed")}}
+          >Completed</button>
+          <button className="bg-yellow-500 text-white px-3 rounded"
+          onClick={()=>{setFilter("all")}}
+          >ALL</button>
+        </div>
+
         <ul className="mt-6 w-80 flex flex-col gap-2 ">
-          {todos.map((todo) => (
+          {filteredTodos.map((todo) => (
             <>
               <div className="flex flex-row gap-2">
                 <input
