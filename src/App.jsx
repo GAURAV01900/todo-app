@@ -60,12 +60,16 @@ function App() {
     setTodos(completede);
   };
 
+  const remaining = todos.filter((todo)=> !todo.completed).length
+
   return (
     <>
       <div className="min-h-screen bg-gray-100 flex flex-col items-center p-10">
         <h1 className="text-3xl font-bold text-center bg-amber-200">
           Todo App
         </h1>
+
+        
 
         <div className="flex gap-2 ">
           <div className="flex gap-2 align-center mt-2">
@@ -107,6 +111,8 @@ function App() {
           onClick={()=>{setFilter("all")}}
           >ALL</button>
         </div>
+
+        <div className={filter==="active"? "mt-2 bg-black rounded p-2 text-red-500": "hidden"}><h2>REMAINING : {remaining}</h2></div>
 
         <ul className="mt-6 w-80 flex flex-col gap-2 ">
           {filteredTodos.map((todo) => (
