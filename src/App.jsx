@@ -27,6 +27,19 @@ function App() {
   }, [todos]);
 
   const addTodo = () => {
+
+  if (input.trim()==="") return
+  const active_todos = todos.filter((todo)=> !todo.completed)
+  const exists = active_todos.some((todo)=> todo.text===input.trim())
+
+  if(exists){
+    alert("todo already exist")
+    setInput("")
+    return
+  }
+
+   
+    
     const newTodo = {
       id: Date.now(),
       text: input,
